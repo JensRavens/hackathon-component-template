@@ -2,7 +2,8 @@
   "name": "dashspace-builder",
   "module": "dist/index.mjs",
   "scripts": {
-    "build": "NODE_ENV=production tsup src/index.tsx"
+    "build": "NODE_ENV=production tsup src/index.tsx",
+    "remote-build": "node --env-file .env.local --experimental-strip-types ./script/sandbox.ts"
   },
   "volta": {
     "node": "22.17.0",
@@ -11,9 +12,13 @@
   "devDependencies": {
     "@tailwindcss/cli": "^4.1.11",
     "@tailwindcss/postcss": "^4.1.11",
+    "@types/ms": "^2.1.0",
+    "@types/node": "^24.0.13",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
+    "@vercel/sandbox": "^0.0.13",
     "autoprefixer": "^10.4.21",
+    "ms": "^2.1.3",
     "postcss": "^8.5.6",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
