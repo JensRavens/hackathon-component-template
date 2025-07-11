@@ -1,4 +1,24 @@
 {
   "name": "dashspace-builder",
-  "packageManager": "yarn@4.9.2"
+  "module": "dist/index.mjs",
+  "scripts": {
+    "build": "NODE_ENV=production tsup src/index.tsx"
+  },
+  "volta": {
+    "node": "22.17.0",
+    "yarn": "1.22.22"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.1.11",
+    "@tailwindcss/postcss": "^4.1.11",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.6",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "tailwindcss": "^4.1.11",
+    "tsup": "^8.5.0",
+    "typescript": "^5.8.3"
+  }
 }
