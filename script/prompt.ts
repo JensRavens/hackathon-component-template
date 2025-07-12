@@ -7,7 +7,7 @@ for await (const message of query({
   prompt,
   abortController: new AbortController(),
   options: {
-    maxTurns: 20,
+    maxTurns: 200,
     allowedTools: ["Task",
       "Glob",
       "Grep",
