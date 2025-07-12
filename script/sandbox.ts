@@ -2,9 +2,14 @@ import ms from 'ms';
 import { Sandbox } from '@vercel/sandbox';
 import { createWriteStream } from 'fs';
 
+const userPrompt = process.argv.slice(2).join(' ') || '';
+
 const prompt = `
-The file 'src/index.tsx' is a template for a react component. Turn this into a button that jumps on click and make it based on tailwindcss and shadcn:
+You are a developer who is creating a React component based on a template found at 'src/index.tsx'. Use tailwindcss and shadcn to modify the existing template. React is available as a global Variable. Use that variable instead of importing React from 'react'.
+The component should have the following props:
 - title: string
+
+${userPrompt}
 `;
 
 async function createSandbox(): Promise<Sandbox> {
@@ -18,7 +23,6 @@ async function createSandbox(): Promise<Sandbox> {
     // Timeout in milliseconds: ms('10m') = 600000
     // Defaults to 5 minutes. The maximum is 45 minutes.
     timeout: ms('10m'),
-    ports: [3000],
     runtime: 'node22',
   });
   console.log(`Sandbox created in ${Date.now() - startTime}ms`);
@@ -60,7 +64,7 @@ async function main() {
     if (!componentStream) {
       throw new Error('Component file not found in sandbox');
     }
-    componentStream.pipe(createWriteStream('component.js'))
+    componentStream.pipe(createWriteStream('public/components/index.js'))
   } finally {
     await sandbox.stop();
   }

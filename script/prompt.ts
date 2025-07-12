@@ -11,6 +11,7 @@ for await (const message of query({
     allowedTools: ["Task",
       "Glob",
       "Grep",
+      "Bash",
       "LS",
       "exit_plan_mode",
       "Read",
