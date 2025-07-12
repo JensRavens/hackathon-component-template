@@ -1,7 +1,5 @@
 import ms from 'ms';
 import { Sandbox } from '@vercel/sandbox';
-import { exec } from 'child_process';
-import { writeFile } from 'fs/promises';
 import { createWriteStream } from 'fs';
 
 async function createSandbox(): Promise<Sandbox> {
@@ -36,15 +34,15 @@ async function execute(sandbox: Sandbox, command: string, args?: string[]) {
   console.log(`Command "${command} ${args?.join(' ')}" executed in ${Date.now() - startTime}ms`);
   return result;
 }
- 
+
 async function main() {
   const sandbox = await createSandbox();
 
   try {
     await execute(sandbox, 'pnpm', ['install', '--loglevel', 'info']);
     await execute(sandbox, 'pnpm', ['run', 'build']);
-    const componentStream = await sandbox.readFile({path: 'dist/index.mjs'});
-    if(!componentStream) {
+    const componentStream = await sandbox.readFile({ path: 'public/components/index.mjs' });
+    if (!componentStream) {
       throw new Error('Component file not found in sandbox');
     }
     componentStream.pipe(createWriteStream('component.js'))
@@ -52,5 +50,5 @@ async function main() {
     await sandbox.stop();
   }
 }
- 
+
 main().catch(console.error);

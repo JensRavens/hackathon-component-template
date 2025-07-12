@@ -1,6 +1,7 @@
 {
   "name": "dashspace-builder",
   "module": "dist/index.mjs",
+  "type": "module",
   "scripts": {
     "build": "NODE_ENV=production tsup src/index.tsx",
     "remote-build": "node --env-file .env.local --experimental-strip-types ./script/sandbox.ts"
