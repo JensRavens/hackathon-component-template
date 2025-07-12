@@ -2,6 +2,11 @@ import ms from 'ms';
 import { Sandbox } from '@vercel/sandbox';
 import { createWriteStream } from 'fs';
 
+const prompt = `
+The file 'src/index.tsx' is a template for a react component. Turn this into a button that jumps on click and make it based on tailwindcss and shadcn:
+- title: string
+`;
+
 async function createSandbox(): Promise<Sandbox> {
   const startTime = Date.now();
   const sandbox = await Sandbox.create({
@@ -40,6 +45,16 @@ async function main() {
 
   try {
     await execute(sandbox, 'pnpm', ['install', '--loglevel', 'info']);
+    await sandbox.writeFiles([
+      {
+        path: '.env.local',
+        content: Buffer.from(`ANTHROPIC_API_KEY="${process.env.ANTHROPIC_API_KEY}"`, 'utf-8'),
+      },
+      {
+        path: 'prompt.md',
+        content: Buffer.from(prompt, 'utf-8'),
+      }]);
+    await execute(sandbox, 'pnpm', ['run', 'prompt']);
     await execute(sandbox, 'pnpm', ['run', 'build']);
     const componentStream = await sandbox.readFile({ path: 'public/components/index.js' });
     if (!componentStream) {

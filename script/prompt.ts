@@ -24,6 +24,6 @@ for await (const message of query({
       "WebSearch"],
   },
 })) {
-  console.log(message.message?.content ?? JSON.stringify(message, null, 2));
+  console.log(JSON.stringify(message.message?.content ?? message, null, 2));
 }
 
