@@ -1,7 +1,31 @@
 import "./index.css";
 
-console.log('Hello, World!');
+import {
+  Card,
+  CardAction,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
 
-export function Box() {
-  return <div className="text-3xl font-bold underline">This is a box component.</div>;
+interface Props {
+  title: string;
+}
+
+export default function Box({ title }: Props) {
+  return <Card>
+    <CardHeader>
+      <CardTitle>{title}</CardTitle>
+      <CardDescription>Card Description</CardDescription>
+      <CardAction>Card Action</CardAction>
+    </CardHeader>
+    <CardContent>
+      <p>Card Content</p>
+    </CardContent>
+    <CardFooter>
+      <p>Card Footer</p>
+    </CardFooter>
+  </Card>
 }
