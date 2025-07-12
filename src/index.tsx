@@ -5,5 +5,6 @@ interface Props {
 }
 
 export default function Component({ title }: Props) {
-  return <span>component goes here with {title}</span>
+  const [number, setNumber] = React.useState(0);
+  return <span onClick={() => setNumber(num => num + 1)}>component goes here with {title} ({number})</span>
 }

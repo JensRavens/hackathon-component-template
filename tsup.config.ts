@@ -16,5 +16,14 @@ export default defineConfig({
   minify: true,
   injectStyle: true,
   format: ["esm"],
+  external: ["react", "react-dom"],
+  // Configure React as a global variable
+  define: {
+    "process.env.NODE_ENV": '"production"'
+  },
+  // Map external modules to global variables
+  banner: {
+    js: 'const React = globalThis.React;'
+  },
   target: ["chrome137"],
 });

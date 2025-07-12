@@ -41,7 +41,7 @@ async function main() {
   try {
     await execute(sandbox, 'pnpm', ['install', '--loglevel', 'info']);
     await execute(sandbox, 'pnpm', ['run', 'build']);
-    const componentStream = await sandbox.readFile({ path: 'public/components/index.mjs' });
+    const componentStream = await sandbox.readFile({ path: 'public/components/index.js' });
     if (!componentStream) {
       throw new Error('Component file not found in sandbox');
     }
