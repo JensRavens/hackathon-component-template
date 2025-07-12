@@ -1,11 +1,7 @@
 import { query, type SDKMessage } from "@anthropic-ai/claude-code";
+import { readFile } from "fs/promises";
 
-const messages: SDKMessage[] = [];
-
-const prompt = `
-The file 'src/index.tsx' is a template for a react component. Turn this into a with the following props that shoots fireworks when clicked and make it based on tailwindcss and shadcn:
-- title: string
-`
+const prompt = await readFile("prompt.md", "utf-8");
 
 for await (const message of query({
   prompt,
