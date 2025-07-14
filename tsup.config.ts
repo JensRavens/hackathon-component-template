@@ -16,6 +16,7 @@ export default defineConfig({
   minify: true,
   injectStyle: true,
   format: ["esm"],
+  noExternal: [/(?!react$|react-dom$).+/],
   external: ["react", "react-dom"],
   // Configure React as a global variable
   define: {
